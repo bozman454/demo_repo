@@ -6,19 +6,19 @@ const fs = require('fs');
 const app = express();
 
 
-app.use(
-    bp()
-    )
+app.use(bp())
 
 // good habit to start now, setting up config files in the root of the repo
 const configz = JSON.parse(fs.readFileSync('./config.json', 'utf-8'))
 const PORT = configz.PORT;
 
 
-app.post('/api/sendstuff/', (req, res) => {
-    if (req.body) {
-        console.log(`request recieved, printing now...`)
-        console.log(req.body)
+app.post('/api/sendstuff/:id', (req, res) => {
+
+    console.log(req)
+    if (req.params.id) {
+        console.log(`request recieved, printing params now...`)
+        console.log(req.params.id)
         res.status(200).send({message: 'request recieved'});
     }
     else
